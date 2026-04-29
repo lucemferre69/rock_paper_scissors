@@ -23,19 +23,19 @@ btnNewGame.addEventListener("click", ()=>{
 })
 btnRock.addEventListener("click", ()=>{
     pChoice = "rock"
-    playerImg.innerHTML = `<img src="/images/rock.png" style="transform: rotate(90deg);">`
+    playerImg.innerHTML = `<img src="images/rock.png" style="transform: rotate(90deg);">`
     machineChoice()
     playRound(pChoice, mChoice)
 })
 btnPaper.addEventListener("click", ()=>{
     pChoice = "paper"
-    playerImg.innerHTML = `<img src="/images/paper.png" style="transform: rotate(90deg);">`
+    playerImg.innerHTML = `<img src="images/paper.png" style="transform: rotate(90deg);">`
     machineChoice()
     playRound(pChoice, mChoice)
 })
 btnScissors.addEventListener("click", ()=>{
     pChoice = "scissors"
-    playerImg.innerHTML = `<img src="/images/scissors.png" style="transform: rotate(90deg);">`
+    playerImg.innerHTML = `<img src="images/scissors.png" style="transform: rotate(90deg);">`
     machineChoice()
     playRound(pChoice, mChoice)
 })
@@ -45,15 +45,15 @@ function machineChoice(){
     switch(mChoice){
         case 1:
             mChoice = "rock"
-            machineImg.innerHTML = `<img src="/images/rock.png" style="transform: rotate(-90deg) scaleX(-1);">`
+            machineImg.innerHTML = `<img src="images/rock.png" style="transform: rotate(-90deg) scaleX(-1);">`
             break
         case 2:
             mChoice = "paper"
-            machineImg.innerHTML = `<img src="/images/paper.png" style="transform: rotate(-90deg) scaleX(-1);">`
+            machineImg.innerHTML = `<img src="images/paper.png" style="transform: rotate(-90deg) scaleX(-1);">`
             break
         case 3:
             mChoice = "scissors"
-            machineImg.innerHTML = `<img src="/images/scissors.png" style="transform: rotate(-90deg) scaleX(-1);">`
+            machineImg.innerHTML = `<img src="images/scissors.png" style="transform: rotate(-90deg) scaleX(-1);">`
             break
     }
     return mChoice
