@@ -1,77 +1,87 @@
 let mChoice = 0
-let hChoice = ""
 let player = 0
 let machine = 0
+let pChoice = ''
+const container = document.querySelector("#container")
+const btnNewGame = document.querySelector("#newGame")
+const btnRock = document.querySelector("#rock")
+const btnPaper = document.querySelector("#paper")
+const btnScissors = document.querySelector("#scissors")
+const score = document.querySelector("#score")
+const choice = document.querySelector("#choice")
+
+btnNewGame.addEventListener("click", ()=>{
+    player = 0
+    machine = 0
+    score.textContent = `Player score: ${player} | Machine score: ${machine}`
+    choice.style.display = "flex"
+    container.innerHTML = `<div id="playerImg"></div>
+                            <span></span>
+                            <div id="machineImg"></div>`
+    window.playerImg = document.querySelector("#playerImg")
+    window.machineImg = document.querySelector("#machineImg")
+})
+btnRock.addEventListener("click", ()=>{
+    pChoice = "rock"
+    playerImg.innerHTML = `<img src="/images/rock.png" style="transform: rotate(90deg);">`
+    machineChoice()
+    playRound(pChoice, mChoice)
+})
+btnPaper.addEventListener("click", ()=>{
+    pChoice = "paper"
+    playerImg.innerHTML = `<img src="/images/paper.png" style="transform: rotate(90deg);">`
+    machineChoice()
+    playRound(pChoice, mChoice)
+})
+btnScissors.addEventListener("click", ()=>{
+    pChoice = "scissors"
+    playerImg.innerHTML = `<img src="/images/scissors.png" style="transform: rotate(90deg);">`
+    machineChoice()
+    playRound(pChoice, mChoice)
+})
 function machineChoice(){
     mChoice = Math.random() * (4 - 1) + 1
     mChoice = Math.trunc(mChoice)
     switch(mChoice){
         case 1:
             mChoice = "rock"
+            machineImg.innerHTML = `<img src="/images/rock.png" style="transform: rotate(-90deg) scaleX(-1);">`
             break
         case 2:
             mChoice = "paper"
+            machineImg.innerHTML = `<img src="/images/paper.png" style="transform: rotate(-90deg) scaleX(-1);">`
             break
         case 3:
             mChoice = "scissors"
+            machineImg.innerHTML = `<img src="/images/scissors.png" style="transform: rotate(-90deg) scaleX(-1);">`
             break
     }
     return mChoice
 }
-function humanChoice() {
-    hChoice = prompt("Ingrese 'Rock', 'Paper' or 'Scissors': ")
-    hChoice = hChoice.toLowerCase()
-    return hChoice
-}
-function playRound(mChoice, hChoice){
-        console.log("Machine Choice: ", mChoice, "| Player Choice: ", hChoice)
-        if (mChoice == "rock"){
-            if (hChoice == "paper"){
-                player ++;
-                console.log("Player wins!");
-            } else if (mChoice == "scissors"){
-                machine ++;
-                console.log("Machine wins!");
-            } else {
-                console.log("Nobody wins!");
-            }
-        } else if (mChoice == "paper"){
-            if(hChoice == "scissors"){
-                player ++;
-                console.log("Player wins!");
-            } else if (hChoice == "rock") {
-                machine ++;
-                console.log("Machine wins!")
-            } else {
-                console.log("Nobody wins!");
-            }
-        } else {
-            if (hChoice == "rock"){
-                player ++;
-                console.log("Player wins!");
-            } else if (hChoice == "paper") {
-                machine ++;
-                console.log("Machine wins!");
-            } else {
-                console.log("Nobody wins!");
-            }
+function playRound(pChoice, mChoice){
+    switch (pChoice){
+    case "rock":
+        if (mChoice == "paper"){
+            machine++
+        } else if (mChoice == "scissors"){
+            player++
         }
-}
-function playGame(){
-    player = 0
-    machine = 0
-    for (i = 0; i < 5; i++){
-        machineChoice()
-        humanChoice()
-        playRound(mChoice, hChoice)
+        break
+    case "paper":
+        if (mChoice == "scissors"){
+            machine++
+        } else if (mChoice == "rock"){
+            player++
+        }
+        break
+    case "scissors":
+        if(mChoice == "rock"){
+            machine++
+        } else if (mChoice == "paper") {
+            player++
+        }
     }
-    console.log("Machine Score: ", machine, "| Player Score: ", player)
-    if (player > machine){
-        console.log("Player wins the game!")
-    } else if (player < machine){
-        console.log("Machine wins the game!")
-    } else {
-        console.log("Tied game, nobody wins!")
-    }
+    score.textContent = `Player score: ${player} | Machine score: ${machine}`
+    if (player == 5){container.innerHTML = `<p style="font-size: 100px;">Player Wins!</p>`; choice.style.display = "none"}
+    else if (machine == 5){container.innerHTML = `<p style="font-size: 100px;">Machine Wins!</p>`; choice.style.display = "none"}
 }
-console.log("Hello, today we gonna play a simple rock paper scissors game. Type 'playGame()' to start a game of five rounds against me (The machine).")
